@@ -1,13 +1,10 @@
 import { MarkdownPostProcessorContext, Plugin } from 'obsidian';
 import { defaultSettings, HTMLTabsPluginSettings } from "settings";
-import { Tab } from 'tab';
-
-// Remember to rename these classes and interfaces!
+import { Tab } from './tab';
+import { parseTabs } from './util/parsing';
 
 export default class HTMLTabsPlugin extends Plugin {
 	settings: HTMLTabsPluginSettings;
-
-	tabs: Tab[];
 
 	async onload() {
 		await this.loadSettings();
@@ -98,49 +95,11 @@ export default class HTMLTabsPlugin extends Plugin {
 
 	public async renderTabs(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<void> {
 		// Parse the source
-		this.tabs = this.parseTabs(source);
+		const tabs: Tab[] = parseTabs(source);
 		// Create the elements
 		// Render the content of the tabs
 		console.warn("renderTabs:", source);
-		console.log(this.tabs);
-	}
-	public parseTabs(source: string): Tab[] {
-		const lines = source.split("\n");
-		const tabs: Tab[] = [];
-		let newTab = null;
-
-		for (const line of lines) {
-			if (line.startsWith("---tab")) {
-				if (newTab) {
-					tabs.push(newTab);
-					newTab = null;
-				}
-
-				const match = line.match(/---tab (\w+) (.+)/);
-				if (match) {
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					const [_, id, label] = match;
-					newTab = {
-						id: id.trim(),
-						label: label.trim(),
-						content: ""
-					}
-				}
-			} else if (newTab) {
-				if (newTab.content === "") {
-					newTab.content += line;
-				}
-				else {
-					newTab.content += "\n" + line;
-				}
-			}
-		}
-
-		if (newTab) {
-			tabs.push(newTab);
-		}
-
-		return tabs;
+		console.log(tabs);
 	}
 
 }

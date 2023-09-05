@@ -127,8 +127,8 @@ const config = {
 
   // A list of paths to directories that Jest should use to search for files in
   roots: [
-    "src",
-    "tests",
+    "<rootDir>/src/",
+    "<rootDir>/tests/",
   ],
 
   // Allows you to use a custom runner instead of Jest's default test runner
@@ -176,20 +176,20 @@ const config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  "transform": {
-    "^.+\\.tsx?$": "esbuild-jest", 
-  },
   // "transform": {
-  //   "^.+\\.tsx?$": [ 
-  //     "esbuild-jest", 
-  //     { 
-  //       sourcemap: true,
-  //       loaders: {
-  //         '.spec.ts': 'tsx'
-  //       }
-  //     } 
-  //   ]
+  //   "^.+\\.tsx?$": "esbuild-jest", 
   // },
+  "transform": {
+    "^.+\\.tsx?$": [ 
+      "esbuild-jest", 
+      { 
+        sourcemap: true,
+        loaders: {
+          '.spec.ts': 'tsx'
+        }
+      } 
+    ]
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [

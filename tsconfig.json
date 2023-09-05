@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "inlineSourceMap": true,
     "inlineSources": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "module": "ESNext",
     "target": "ES6",
     "allowJs": true,
@@ -19,5 +22,5 @@
     ]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["lib/**/*"]
+  "exclude": ["lib/**/*", "node_modules/**/*"],
 }
