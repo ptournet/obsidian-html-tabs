@@ -1,28 +1,32 @@
-import { Tab } from "../tab";
+import { Tabs } from "../tabs";
 
 export class Parser {}
 
-export function parseTabs(source: string): Tab[] {
+export function parseTabs(source: string): Tabs {
 	const lines = source.split("\n");
-	const tabs: Tab[] = [];
+    const tabs: Tabs = { tabs: [], active_id: "" };
 	let newTab = null;
 
 	for (const line of lines) {
 		if (line.startsWith("---tab")) {
 			if (newTab) {
-				tabs.push(newTab);
+				tabs.tabs.push(newTab);
 				newTab = null;
 			}
 
-			const match = line.match(/---tab (\w+) (.+)/);
+			const match = line.match(/---tab(\*)? (\w+) (.+)/);
 			if (match) {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				const [_, id, label] = match;
+				const [_, isStarred, id, label] = match;
 				newTab = {
 					id: id.trim(),
 					label: label.trim(),
 					content: "",
 				};
+                
+                if (isStarred !== undefined) {
+                    tabs.active_id = newTab.id;
+                }
 			}
 		} else if (newTab) {
 			if (newTab.content === "") {
@@ -34,7 +38,7 @@ export function parseTabs(source: string): Tab[] {
 	}
 
 	if (newTab) {
-		tabs.push(newTab);
+		tabs.tabs.push(newTab);
 	}
 
 	return tabs;
