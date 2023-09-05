@@ -1,10 +1,10 @@
 export class Tab {
-    id = "";
+    id = 0;
     label = "";
     content = "";
 }
 
 export class Tabs {
     tabs: Tab[] = [];
-    active_id = "";
+    active_id = 0;
 }

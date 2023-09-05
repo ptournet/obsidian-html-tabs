@@ -3,27 +3,27 @@ import { parseTabs } from "../../src/util/parsing";
 
 test("parseTabs", () => {
     const source = `Line to ignore
----tab 1 Profile
+---tab Profile
 One liner profile tab content.
----tab* 2 Account
----tab 3 Settings
+---tab* Account
+---tab Settings
 Multiline settings
 tab content.`;
     const expectedTabs = {
-		active_id: "2",
+		active_id: 1,
 		tabs: [
 			{
-				id: "1",
+				id: 0,
 				label: "Profile",
 				content: "One liner profile tab content.",
 			},
 			{
-				id: "2",
+				id: 1,
 				label: "Account",
 				content: "",
 			},
 			{
-				id: "3",
+				id: 2,
 				label: "Settings",
 				content: "Multiline settings\ntab content.",
 			},

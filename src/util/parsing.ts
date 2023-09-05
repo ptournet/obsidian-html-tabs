@@ -4,8 +4,9 @@ export class Parser {}
 
 export function parseTabs(source: string): Tabs {
 	const lines = source.split("\n");
-    const tabs: Tabs = { tabs: [], active_id: "" };
+    const tabs: Tabs = { tabs: [], active_id: 0 };
 	let newTab = null;
+    let id = 0;
 
 	for (const line of lines) {
 		if (line.startsWith("---tab")) {
@@ -14,12 +15,12 @@ export function parseTabs(source: string): Tabs {
 				newTab = null;
 			}
 
-			const match = line.match(/---tab(\*)? (\w+) (.+)/);
+			const match = line.match(/---tab(\*)? (.+)/);
 			if (match) {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				const [_, isStarred, id, label] = match;
+				const [_, isStarred, label] = match;
 				newTab = {
-					id: id.trim(),
+					id: id++,
 					label: label.trim(),
 					content: "",
 				};
