@@ -2,6 +2,7 @@ import { MarkdownPostProcessorContext, Plugin } from 'obsidian';
 import { defaultSettings, HTMLTabsPluginSettings } from "settings";
 import { Tabs } from './tabs';
 import { parseTabs } from './util/parsing';
+import { render } from 'ui/rendering';
 
 export default class HTMLTabsPlugin extends Plugin {
 	settings: HTMLTabsPluginSettings | undefined;
@@ -94,12 +95,8 @@ export default class HTMLTabsPlugin extends Plugin {
     }
 
 	public async renderTabs(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<void> {
-		// Parse the source
 		const tabs: Tabs = parseTabs(source);
-		// Create the elements
-		// Render the content of the tabs
-		console.warn("renderTabs:", source);
-		console.log(tabs);
+		render(tabs, source, el, ctx);
 	}
 
 }

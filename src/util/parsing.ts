@@ -4,7 +4,7 @@ export class Parser {}
 
 export function parseTabs(source: string): Tabs {
 	const lines = source.split("\n");
-    const tabs: Tabs = { tabs: [], active_id: 0 };
+    const tabs: Tabs = new Tabs();
 	let newTab = null;
     let id = 0;
 
