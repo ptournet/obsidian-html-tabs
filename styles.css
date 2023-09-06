@@ -12,6 +12,38 @@ If your plugin does not need CSS, delete this file.
     margin-right: .5rem;
     margin-bottom: 1rem;
     font-size: 1.25rem;
+    /* line-height: 3rem; */
     border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: hsla(226, 232, 240, 1);
+    cursor: pointer;
+}
+
+.html-tab {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.html-tab:hover {
+    color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.75);
+}
+
+.html-tab-not-first {
+    margin-left: 1rem;
+}
+
+.html-tab-active {
+    color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 1);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 1);
+}
+
+.html-tab-content {
+    padding: 0.5rem;
+    display: none;
+}
+
+.html-tab-content-active {
+    display: block;
 }

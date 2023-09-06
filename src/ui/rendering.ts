@@ -11,13 +11,26 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 	const divTabs = divMain.createEl("div", { cls: ["html-tabs"] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];
-		divTabs.createEl("div", { text: element.label });
+		const classes = ["html-tab"];
+		if (index > 0) {
+			classes.push("html-tab-not-first");
+		}
+		if (index === tabs.active_id) {
+			classes.push("html-tab-active");
+		}
+		// const attributes = { '@click': 'tab = ' + element.id  };
+		// divTabs.createEl("div", { text: element.label, cls: classes, attr: attributes });
+		divTabs.createEl("div", { text: element.label, cls: classes });
 	}
 
-	const divContent = divMain.createEl("div");
+	const divContent = divMain.createEl("div", { cls: [] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];
-		divContent.createEl("div", { text: element.content });
+		const classes = ["html-tab-content"];
+		if (index === tabs.active_id) {
+			classes.push("html-tab-content-active");
+		}
+		divContent.createEl("div", { text: element.content, cls: classes });
 	}
 }
 
