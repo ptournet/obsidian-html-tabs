@@ -6,3 +6,12 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+.html-tabs {
+    display: flex;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    border-bottom-width: 1px;
+    border-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 1);
+}

@@ -1,3 +1,4 @@
+import { MarkdownPostProcessorContext } from "obsidian";
 import { Tabs } from "tabs";
 
 export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: MarkdownPostProcessorContext): void {
@@ -6,8 +7,8 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 		return;
 	}
 
-	const divMain = container.createEl("div");
-	const divTabs = divMain.createEl("div");
+	const divMain = container.createEl("div", "{'attr':{'x-data': '{ tab: " + tabs.active_id + " }'}}");
+	const divTabs = divMain.createEl("div", { cls: ["html-tabs"] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];
 		divTabs.createEl("div", { text: element.label });
