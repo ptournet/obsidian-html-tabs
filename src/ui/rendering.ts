@@ -7,7 +7,8 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 		return;
 	}
 
-	const divMain = container.createEl("div", "{'attr':{'x-data': '{ tab: " + tabs.active_id + " }'}}");
+	const mainAttributes = { 'obs-x-data': "() => { tab: " + tabs.active_id + " }" };
+	const divMain = container.createEl("div", {attr: mainAttributes});
 	const divTabs = divMain.createEl("div", { cls: ["html-tabs"] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];
@@ -18,9 +19,8 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 		if (index === tabs.active_id) {
 			classes.push("html-tab-active");
 		}
-		// const attributes = { '@click': 'tab = ' + element.id  };
-		// divTabs.createEl("div", { text: element.label, cls: classes, attr: attributes });
-		divTabs.createEl("div", { text: element.label, cls: classes });
+		const attributes = { 'obs-x-on:click': 'tab = ' + element.id };
+		divTabs.createEl("div", { text: element.label, cls: classes, attr: attributes });
 	}
 
 	const divContent = divMain.createEl("div", { cls: [] });

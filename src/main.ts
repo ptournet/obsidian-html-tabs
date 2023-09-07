@@ -3,6 +3,10 @@ import { defaultSettings, HTMLTabsPluginSettings } from "settings";
 import { Tabs } from './tabs';
 import { parseTabs } from './util/parsing';
 import { render } from 'ui/rendering';
+import Alpine from 'alpinejs';
+ 
+Alpine.prefix("obs-x-")
+Alpine.start();
 
 export default class HTMLTabsPlugin extends Plugin {
 	settings: HTMLTabsPluginSettings | undefined;
@@ -70,10 +74,12 @@ export default class HTMLTabsPlugin extends Plugin {
 
 		// // When registering intervals, this function will automatically clear the interval when the plugin is disabled.
 		// this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
+
+		console.log(`Alpine.js ${Alpine.version} loaded`);
 	}
 
 	onunload() {
-
+		console.log(`Alpine.js ${Alpine.version} unloaded`);
 	}
 
 	async loadSettings() {
