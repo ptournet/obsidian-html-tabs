@@ -6,13 +6,16 @@ settings:
 
 dependencies:
   alpinejs:
-    specifier: ^3.13.0
+    specifier: 3.13.0
     version: 3.13.0
 
 devDependencies:
   '@jest/globals':
     specifier: ^29.6.4
     version: 29.6.4
+  '@types/alpinejs':
+    specifier: ^3.7.2
+    version: 3.7.2
   '@types/node':
     specifier: ^16.11.6
     version: 16.18.48
@@ -36,7 +39,7 @@ devDependencies:
     version: 29.6.4(@types/node@16.18.48)
   obsidian:
     specifier: latest
-    version: 1.4.4(@codemirror/state@6.2.1)(@codemirror/view@6.17.1)
+    version: 1.4.4(@codemirror/state@6.2.1)(@codemirror/view@6.18.0)
   tslib:
     specifier: 2.4.0
     version: 2.4.0
@@ -413,8 +416,8 @@ packages:
     resolution: {integrity: sha512-RupHSZ8+OjNT38zU9fKH2sv+Dnlr8Eb8sl4NOnnqz95mCFTZUaiRP8Xv5MeeaG0px2b8Bnfe7YGwCV3nsBhbuw==}
     dev: true
 
-  /@codemirror/view@6.17.1:
-    resolution: {integrity: sha512-I5KVxsLbm1f56n9SUajLW0/AzMXYEZVvkiYahMw/yGl5gUjT2WquuKO39xUtiT4z/hNhGD7YuAEVPI8u0mncaQ==}
+  /@codemirror/view@6.18.0:
+    resolution: {integrity: sha512-T6q1yYAoU+gSWfJFR4ryvDQcyOqS+Mw5RCvh26y0KiNksOOLYhNvdB3BTyLz8vy4fKaYlzbAOyBU7OQPUGHzjQ==}
     dependencies:
       '@codemirror/state': 6.2.1
       style-mod: 4.1.0
@@ -1007,6 +1010,12 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
+  /@types/alpinejs@3.7.2:
+    resolution: {integrity: sha512-M/PAVysvGxOlhifP/6XmO8bj5HW9w+Ygr03PdryM3tCb1KuQEaAAvVcyeZc5T75PbjH3dCzy/M/w/nJEE0FTSg==}
+    dependencies:
+      '@vue/reactivity': 3.3.4
+    dev: true
+
   /@types/babel__core@7.20.1:
     resolution: {integrity: sha512-aACu/U/omhdk15O4Nfb+fHgH/z3QsfQzpnvRZhYhThms83ZnAOZz7zZAWO7mn2yyNQaA4xTO8GLK3uqFU4bYYw==}
     dependencies:
@@ -1234,9 +1243,19 @@ packages:
       '@vue/shared': 3.1.5
     dev: false
 
+  /@vue/reactivity@3.3.4:
+    resolution: {integrity: sha512-kLTDLwd0B1jG08NBF3R5rqULtv/f8x3rOFByTDz4J53ttIQEDmALqKqXY0J+XQeN0aV2FBxY8nJDf88yvOPAqQ==}
+    dependencies:
+      '@vue/shared': 3.3.4
+    dev: true
+
   /@vue/shared@3.1.5:
     resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
     dev: false
+
+  /@vue/shared@3.3.4:
+    resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
+    dev: true
 
   /acorn-jsx@5.3.2(acorn@8.10.0):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3429,14 +3448,14 @@ packages:
       isobject: 3.0.1
     dev: true
 
-  /obsidian@1.4.4(@codemirror/state@6.2.1)(@codemirror/view@6.17.1):
+  /obsidian@1.4.4(@codemirror/state@6.2.1)(@codemirror/view@6.18.0):
     resolution: {integrity: sha512-q2V5GNT/M40uYOENdVw5kovPSoaO6vppiiyBCkIqWgKp4oN654jA/GQ0OaNBA7p5NdfS245QCeRgCFQ42wOZiw==}
     peerDependencies:
       '@codemirror/state': ^6.0.0
       '@codemirror/view': ^6.0.0
     dependencies:
       '@codemirror/state': 6.2.1
-      '@codemirror/view': 6.17.1
+      '@codemirror/view': 6.18.0
       '@types/codemirror': 5.60.8
       moment: 2.29.4
     dev: true
