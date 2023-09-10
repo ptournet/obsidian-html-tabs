@@ -1,11 +1,13 @@
-import { MarkdownPostProcessorContext } from "obsidian";
+import { MarkdownPostProcessorContext, MarkdownRenderer } from "obsidian";
 import { Tabs } from "tabs";
 
-export function render(tabs: Tabs, source: string, container: HTMLElement, _: MarkdownPostProcessorContext): void {
+export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: MarkdownPostProcessorContext): void {
 	if (!tabs.hasTabs()) {
 		renderCodeBlock(container, source, "html");
 		return;
 	}
+
+	const plugin = window.html_tabs_plugin;
 
 	const mainAttributes = { "data-x-data": "{ tab: " + tabs.active_id + " }" };
 	const divMain = container.createEl("div", { attr: mainAttributes });
@@ -25,14 +27,15 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, _: Ma
 		};
 		divTabs.createEl("div", { text: element.label, cls: classes, attr: attributes });
 	}
-
-	const divContent = divMain.createEl("div", { cls: ['html-tab-content'] });
+	
+	const divContent = divMain.createEl("div", { cls: ["html-tab-content"] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];
 		const attributes = {
 			"data-x-show": "tab == " + element.id,
 		};
-		divContent.createEl("div", { text: element.content, attr: attributes });
+		const divTabContent = divContent.createEl("div", { attr: attributes });
+		MarkdownRenderer.render(plugin.app, element.content, divTabContent, ctx.sourcePath, plugin);
 	}
 }
 

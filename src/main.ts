@@ -8,10 +8,18 @@ import Alpine from 'alpinejs';
 Alpine.prefix("data-x-")
 Alpine.start();
 
+declare global {
+	interface Window {
+		html_tabs_plugin: HTMLTabsPlugin;
+	}
+}
+
 export default class HTMLTabsPlugin extends Plugin {
 	settings: HTMLTabsPluginSettings | undefined;
 
 	async onload() {
+		window.html_tabs_plugin = this;
+
 		await this.loadSettings();
 
 		this.registerCodeblockPostProcessorWithPriority("tabs", -100, async (source, el, ctx) => this.renderTabs(source, el, ctx));
