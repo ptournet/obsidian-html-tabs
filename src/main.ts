@@ -5,7 +5,7 @@ import { parseTabs } from './util/parsing';
 import { render } from 'ui/rendering';
 import Alpine from 'alpinejs';
  
-Alpine.prefix("obs-x-")
+Alpine.prefix("data-x-")
 Alpine.start();
 
 export default class HTMLTabsPlugin extends Plugin {

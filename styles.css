@@ -41,9 +41,4 @@ If your plugin does not need CSS, delete this file.
 
 .html-tab-content {
     padding: 0.5rem;
-    display: none;
-}
-
-.html-tab-content-active {
-    display: block;
 }
