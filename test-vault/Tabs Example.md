@@ -20,5 +20,5 @@ int main() {
 }
 ```
 ---tab Last tab
-![[Embeded note]]
+![[Embedded note]]
 ~~~
