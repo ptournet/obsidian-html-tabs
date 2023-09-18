@@ -6,6 +6,12 @@ This plugin allows you to easily embed tab controls in your notes.
 
 ## Installation
 
+Follow the steps below to install **HTML Tabs**:
+1. Open Settings > Community plugins
+2. Click `Browse` in the Community plugins section
+3. Search for `HTML Tabs`
+4. Clink `Install` and then `Enable`
+
 ## Usage
 
 The definition of a tab control containing 3 tabs has the following structure:
@@ -60,7 +66,11 @@ For the time being, if you want to change the way your tabs look, you have to us
 
 For that, you'll first need to create a `html-tabs.css` file in your `snippets` directory. If you don't know where it lives on your hard drive, you can locate it at the bottom of the `Appearance` page in your Obsidian `Settings`.
 
+You can then ovveride the `html-tab*` classes defined in the `styles.css` file in the plugin directory.
+
 ## Contributing
+
+You are welcome to contribute to this plugin via bug reports, bug fixes, documentation, or general improvements. For a major feature, please make an issue about your idea / reach out to me so I can decide if and how to best implement it.
 
 ## Pricing
 
@@ -73,7 +83,7 @@ This plugin is provided to everyone for free, however if you would like to say t
 - [ ] First version of README
 - [ ] Create Settings
 - [ ] Test on Android
-- [ ] Create a test-vault and modify *dev* script
+- [x] Create a test-vault and modify *dev* script
 - [ ] Releasing v1.0.0
 - [ ] Improve standard editing experience (place cursor in the right place in the right tab)
 - [ ] Improve embedded editing experience (if tab content is in another note, allow editing that note instead)
