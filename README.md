@@ -3,6 +3,7 @@
 This plugin allows you to easily embed tab controls in your notes.
 
 ## Example
+![HTML Tabs Demo](docs/images/HTML%20Tabs%20Demo.gif)
 
 ## Installation
 
@@ -80,11 +81,11 @@ This plugin is provided to everyone for free, however if you would like to say t
 [![Paypal](https://img.shields.io/badge/paypal-ptournet-yellow?style=social&logo=paypal)](https://paypal.me/ptournet)
 
 ## Todo
-- [ ] First version of README
-- [ ] Create Settings
-- [ ] Test on Android
+- [x] First version of README
+- [x] Validate on Android
 - [x] Create a test-vault and modify *dev* script
 - [ ] Releasing v1.0.0
+- [ ] Create first Settings
 - [ ] Improve standard editing experience (place cursor in the right place in the right tab)
 - [ ] Improve embedded editing experience (if tab content is in another note, allow editing that note instead)
 - [ ] Buttons to easily create/edit tabs
