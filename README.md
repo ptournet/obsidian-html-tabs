@@ -80,6 +80,9 @@ This plugin is provided to everyone for free, however if you would like to say t
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ptournet?style=social)](https://github.com/sponsors/ptournet)
 [![Paypal](https://img.shields.io/badge/paypal-ptournet-yellow?style=social&logo=paypal)](https://paypal.me/ptournet)
 
+## Credits
+Thanks to `gapmiss/obsidian-alpinejs` which helped me integrating Alpine.js to get the tab switching working.
+
 ## Todo
 - [x] First version of README
 - [x] Validate on Android
