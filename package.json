@@ -1,7 +1,7 @@
 {
   "name": "html-tabs",
-  "version": "0.1.0",
-  "description": "Obsidian plugin for creating tabs in notes.",
+  "version": "1.0.0",
+  "description": "Create and render Tabs and tab panels in your notes.",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
