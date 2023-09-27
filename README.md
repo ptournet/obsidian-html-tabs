@@ -7,8 +7,18 @@ This plugin allows you to easily embed tab controls in your notes.
 
 ## Installation
 
+### Download from Github
+
+This is the only way to install the plugin pending its validation to appear on the list of official community plugins:
+1. Go to https://github.com/ptournet/obsidian-html-tabs/releases
+2. Download the latest release.
+3. Extract and put the three files (`main.js`, `style.css`, `manifest.json`) to folder `{{obsidian_vault}}/.obsidian/plugins/html-tabs`
+4. In `Settings > Community plugins`, activate **HTML Tabs**
+
+### Install from Plugin Store
+
 Follow the steps below to install **HTML Tabs**:
-1. Open Settings > Community plugins
+1. Open `Settings > Community plugins`
 2. Click `Browse` in the Community plugins section
 3. Search for `HTML Tabs`
 4. Clink `Install` and then `Enable`
