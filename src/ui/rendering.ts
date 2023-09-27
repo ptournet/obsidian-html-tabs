@@ -25,9 +25,10 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 			"data-x-bind:class": "{ 'html-tab-active': tab == " + element.id + " }",
 			"data-x-on:click": "tab = " + element.id,
 		};
-		divTabs.createEl("div", { text: element.label, cls: classes, attr: attributes });
+		const divTab = divTabs.createEl("div", { cls: classes, attr: attributes });
+		MarkdownRenderer.render(plugin.app, element.label, divTab, ctx.sourcePath, plugin);
 	}
-	
+
 	const divContent = divMain.createEl("div", { cls: ["html-tab-content"] });
 	for (let index = 0; index < tabs.tabs.length; index++) {
 		const element = tabs.tabs[index];

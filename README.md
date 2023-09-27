@@ -87,8 +87,11 @@ Thanks to `gapmiss/obsidian-alpinejs` which helped me integrating Alpine.js to g
 - [x] First version of README
 - [x] Validate on Android
 - [x] Create a test-vault and modify *dev* script
-- [ ] Releasing v1.0.0
+- [x] Releasing v1.0.0
 - [ ] Create first Settings
+- [x] Markdown rendering of label
+- [ ] Integrate labels in note outline
+- [ ] Ability to open note on a specific label/tab
 - [ ] Improve standard editing experience (place cursor in the right place in the right tab)
 - [ ] Improve embedded editing experience (if tab content is in another note, allow editing that note instead)
 - [ ] Buttons to easily create/edit tabs
