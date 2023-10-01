@@ -2,6 +2,7 @@ import { App, CachedMetadata, HeadingCache, ListItemCache, SectionCache } from "
 
 export function rebuildPageCache(app: App, source: string) {
 	rebuildCache(getPageCache(app), source);
+	app.metadataCache.trigger("changed", app.workspace.getActiveFile());
 }
 
 function getPageCache(app: App): CachedMetadata | null {
