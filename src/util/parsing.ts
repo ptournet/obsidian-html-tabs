@@ -1,12 +1,10 @@
 import { Tabs } from "../tabs";
 
-export class Parser {}
-
 export function parseTabs(source: string): Tabs {
 	const lines = source.split("\n");
-    const tabs: Tabs = new Tabs();
+	const tabs: Tabs = new Tabs();
 	let newTab = null;
-    let id = 0;
+	let id = 0;
 
 	for (const line of lines) {
 		if (line.startsWith("---tab")) {
@@ -24,10 +22,10 @@ export function parseTabs(source: string): Tabs {
 					label: label.trim(),
 					content: "",
 				};
-                
-                if (isStarred !== undefined) {
-                    tabs.active_id = newTab.id;
-                }
+
+				if (isStarred !== undefined) {
+					tabs.active_id = newTab.id;
+				}
 			}
 		} else if (newTab) {
 			if (newTab.content === "") {

@@ -1,8 +1,8 @@
 # Intro
 This is a *basic* note with some **formatting**, some tasks:
-- [ ] First task
-- [ ] Second task
-- [ ] Last task
+- [ ] First embedded task
+- [ ] Second embedded task
+- [ ] Last embedded task
 
 # C++ code snippet:
 ```cpp

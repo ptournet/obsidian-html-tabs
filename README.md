@@ -91,7 +91,12 @@ This plugin is provided to everyone for free, however if you would like to say t
 [![Paypal](https://img.shields.io/badge/paypal-ptournet-yellow?style=social&logo=paypal)](https://paypal.me/ptournet)
 
 ## Credits
+
 Thanks to `gapmiss/obsidian-alpinejs` which helped me integrating Alpine.js to get the tab switching working.
+
+## Limitations
+
+As of now, there is no interaction between Obsidian and the content of the tabs. For instance, if there is a task in a tab and you check it, its status won't persist if you switch to another tab and come back... And this task won't be found by a query (datatview or tasks plugin). A heading on a tab won't show in the note Outline either.
 
 ## Todo
 - [x] First version of README

@@ -1,3 +1,4 @@
+
 ~~~tabs
 ---tab First *tab*
 This is a *sample* **tab** with some markdown :
@@ -22,3 +23,14 @@ int main() {
 ---tab Last tab
 ![[Embedded note]]
 ~~~
+
+---
+# 1-H1
+- [ ] First task
+- [ ] Second task
+## 1.1-H2
+## 1.2-H2
+# 2-H1
+
+```tasks
+```
