@@ -2,6 +2,7 @@ import { MarkdownPostProcessorContext, MarkdownRenderer } from "obsidian";
 import { Tabs } from "tabs";
 
 export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: MarkdownPostProcessorContext): void {
+	console.log("render");
 	if (!tabs.hasTabs()) {
 		renderCodeBlock(container, source, "html");
 		return;
@@ -36,7 +37,20 @@ export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: 
 			"data-x-show": "tab == " + element.id,
 		};
 		const divTabContent = divContent.createEl("div", { attr: attributes });
-		MarkdownRenderer.render(plugin.app, element.content, divTabContent, ctx.sourcePath, plugin);
+		MarkdownRenderer.render(plugin.app, element.content, divTabContent, ctx.sourcePath, plugin).then(() => {
+			const checks = divTabContent.findAll("input[type='checkbox']");
+			for (let i = 0; i < checks.length; i++) {
+				checks[i].addEventListener("click", (event: MouseEvent) => {
+					event.preventDefault();
+					// It is required to stop propagation so that obsidian won't write the file with the
+					// checkbox (un)checked. Obsidian would write after us and overwrite our change.
+					event.stopPropagation();
+
+					// Should be re-rendered as enabled after update in file.
+					console.log("task has ben (un)checked");
+				});
+			}
+		});
 	}
 }
 

@@ -1,6 +1,20 @@
+import { MarkdownPostProcessorContext, MarkdownSectionInformation } from "obsidian";
 import { Tabs } from "../tabs";
 
+export function getFullSource(el: HTMLElement, ctx: MarkdownPostProcessorContext): string[] {
+	const sectionInfo = ctx.getSectionInfo(el);
+	if (!sectionInfo) {
+		return [];
+	}
+
+	let lines = sectionInfo.text.split("\n");
+	lines = lines.slice(sectionInfo.lineStart, sectionInfo.lineEnd + 1);
+	console.log("getFullSource:\n", lines);
+	return lines;
+}
+
 export function parseTabs(source: string): Tabs {
+	console.log("parseTabs");
 	const lines = source.split("\n");
 	const tabs: Tabs = new Tabs();
 	let newTab = null;
