@@ -58,8 +58,8 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			position: {
 				end: {
 					line: 6,
-					col: 6,
-					offset: 96,
+					col: 12,
+					offset: 102,
 				},
 				start: {
 					line: 6,
@@ -75,8 +75,8 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			position: {
 				end: {
 					line: 7,
-					col: 6,
-					offset: 109,
+					col: 12,
+					offset: 115,
 				},
 				start: {
 					line: 7,
@@ -84,12 +84,12 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 					offset: 103,
 				},
 			},
-			intabs: true,
 			task: " ",
+			intabs: true,
 		};
 		if (!pageCache.listItems[0].intabs) {
-			pageCache.listItems.unshift(newTask1);
 			pageCache.listItems.unshift(newTask2);
+			pageCache.listItems.unshift(newTask1);
 		}
 	}
 
@@ -106,13 +106,13 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 				position: {
 					end: {
 						col: 12,
-						line: 6,
-						offset: 104,
+						line: 7,
+						offset: 115,
 					},
 					start: {
 						col: 0,
 						line: 6,
-						offset: 92,
+						offset: 90,
 					},
 				},
 			};
