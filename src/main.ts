@@ -1,5 +1,5 @@
 import { MarkdownPostProcessorContext, Plugin } from 'obsidian';
-import { defaultSettings, HTMLTabsPluginSettings } from "settings";
+// import { defaultSettings, HTMLTabsPluginSettings } from "./settings";
 import { Tabs } from './tabs';
 import { parseTabs } from './util/parsing';
 import { render } from 'ui/rendering';
@@ -15,12 +15,12 @@ declare global {
 }
 
 export default class HTMLTabsPlugin extends Plugin {
-	settings: HTMLTabsPluginSettings | undefined;
+	// settings: HTMLTabsPluginSettings | undefined;
 
 	async onload() {
 		window.html_tabs_plugin = this;
 
-		await this.loadSettings();
+		// await this.loadSettings();
 
 		this.registerCodeblockPostProcessorWithPriority("tabs", -100, async (source, el, ctx) => this.renderTabs(source, el, ctx));
 
@@ -90,13 +90,13 @@ export default class HTMLTabsPlugin extends Plugin {
 		console.log(`Alpine.js ${Alpine.version} unloaded`);
 	}
 
-	async loadSettings() {
-		this.settings = Object.assign({}, defaultSettings, await this.loadData());
-	}
+	// async loadSettings() {
+	// 	this.settings = Object.assign({}, defaultSettings, await this.loadData());
+	// }
 
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
+	// async saveSettings() {
+	// 	await this.saveData(this.settings);
+	// }
 
     /** Register a markdown codeblock post processor with the given priority. */
     public registerCodeblockPostProcessorWithPriority(

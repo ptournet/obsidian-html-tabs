@@ -1,7 +1,9 @@
-export interface HTMLTabsPluginSettings {
-	mySetting: string;
-}
+export function noSettings() {}
 
-export const defaultSettings: HTMLTabsPluginSettings = {
-	mySetting: 'default'
-}
+// export interface HTMLTabsPluginSettings {
+// 	mySetting: string;
+// }
+
+// export const defaultSettings: HTMLTabsPluginSettings = {
+// 	mySetting: 'default'
+// }
