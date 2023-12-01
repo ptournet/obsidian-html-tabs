@@ -1,8 +1,35 @@
-import { App, CachedMetadata, HeadingCache, ListItemCache, SectionCache } from "obsidian";
+import { Lines } from "../lines";
+import { App, CachedMetadata, EmbedCache, HeadingCache, LinkCache, ListItemCache, SectionCache, TagCache } from "obsidian";
+import { parseLinesForCache } from "./parsing";
 
-export function rebuildPageCache(app: App, source: string) {
-	rebuildCache(getPageCache(app), source);
+export function rebuildPageCache(app: App, tabLines: Lines) {
+	rebuildCache(getPageCache(app), tabLines);
+	// TODO: Trigger metadata cache update
 	app.metadataCache.trigger("changed", app.workspace.getActiveFile());
+}
+
+interface EmbedCacheEx extends EmbedCache {
+	intabs: boolean;
+}
+
+interface HeadingCacheEx extends HeadingCache {
+	intabs: boolean;
+}
+
+export interface LinkCacheEx extends LinkCache {
+	intabs: boolean;
+}
+
+interface ListItemCacheEx extends ListItemCache {
+	intabs: boolean;
+}
+
+interface SectionCacheEx extends SectionCache {
+	intabs: boolean;
+}
+
+interface TagCacheEx extends TagCache {
+	intabs: boolean;
 }
 
 function getPageCache(app: App): CachedMetadata | null {
@@ -14,20 +41,38 @@ function getPageCache(app: App): CachedMetadata | null {
 	return app.metadataCache.getFileCache(current_file);
 }
 
-interface HeadingCacheEx extends HeadingCache {
-	intabs: boolean;
-}
-
-interface ListItemCacheEx extends ListItemCache {
-	intabs: boolean;
-}
-
-function rebuildCache(pageCache: CachedMetadata | null, source: string) {
+function rebuildCache(pageCache: CachedMetadata | null, tabLines: Lines) {
 	if (!pageCache) {
 		return;
 	}
 
-	// TODO: rebuildCache
+	const tabCache: CachedMetadata = parseLinesForCache(tabLines);
+
+	rebuildEmbedsCache(pageCache, tabCache);
+	rebuildHeadingsCache(pageCache, tabCache);
+	rebuildLinksCache(pageCache, tabCache);
+	rebuildListItemsCache(pageCache, tabCache);
+	rebuildSectionsCache(pageCache, tabCache);
+	rebuildTagsCache(pageCache, tabCache);
+
+	console.log("rebuildCache", pageCache);
+}
+
+
+function rebuildEmbedsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	if (!tabCache.embeds) {
+		return;
+	}
+
+	if (!pageCache.embeds) {
+		pageCache.embeds = [];
+	}
+
+	// TODO: rebuildEmbedsCache
+}
+
+function rebuildHeadingsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	// TODO: rebuildHeadingsCache
 	if (pageCache.headings) {
 		const newHeading: HeadingCacheEx = {
 			heading: "Heading 2",
@@ -51,7 +96,27 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			pageCache.headings.unshift(newHeading);
 		}
 	}
+}
 
+function rebuildLinksCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	if (!tabCache.links) {
+		return;
+	}
+
+	if (!pageCache.links) {
+		pageCache.links = [];
+	}
+
+	const filteredLinks = pageCache.links.filter(link => !(link as LinkCacheEx).intabs);
+	const newLinks = filteredLinks.concat(tabCache.links as LinkCacheEx[]).sort((a, b) => {
+		return a.position.start.offset - b.position.start.offset;
+	});
+
+	pageCache.links = newLinks;
+}
+
+function rebuildListItemsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	// TODO: rebuildListItemsCache
 	if (pageCache.listItems) {
 		const newTask1: ListItemCacheEx = {
 			parent: -7,
@@ -92,7 +157,10 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			pageCache.listItems.unshift(newTask1);
 		}
 	}
+}
 
+function rebuildSectionsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	// TODO: rebuildSectionsCache
 	if (pageCache.sections) {
 		if (pageCache.sections[0].type == "code") {
 			const tabsSection = pageCache.sections[0];
@@ -120,6 +188,8 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			pageCache.sections.splice(1, 0, newSection);
 		}
 	}
+}
 
-	console.log("rebuildCache", pageCache);
+function rebuildTagsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	// TODO: rebuildTagsCache
 }

@@ -110,9 +110,9 @@ export default class HTMLTabsPlugin extends Plugin {
     }
 
 	public async renderTabs(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<void> {
-		const tabExtSource = getTabExtSource(el, ctx);
-		const tabs = parseTabs(tabExtSource);
-		rebuildPageCache(this.app, source);
+		const tabLines = getTabExtSource(el, ctx);
+		const tabs = parseTabs(tabLines);
+		rebuildPageCache(this.app, tabLines);
 		render(tabs, source, el, ctx);
 	}
 

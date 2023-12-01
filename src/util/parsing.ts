@@ -1,6 +1,7 @@
-import { MarkdownPostProcessorContext } from "obsidian";
+import { CachedMetadata, Loc, MarkdownPostProcessorContext } from "obsidian";
 import { Line, Lines } from "../lines";
 import { Tabs } from "../tabs";
+import { LinkCacheEx } from "./cache";
 
 export function getTabExtSource(el: HTMLElement, ctx: MarkdownPostProcessorContext): Lines {
 	const sectionInfo = ctx.getSectionInfo(el);
@@ -70,4 +71,74 @@ export function parseTabs(lines: Lines): Tabs {
 	}
 
 	return tabs;
+}
+
+export function parseLinesForCache(lines: Lines): CachedMetadata {
+	const tabCache: CachedMetadata = {};
+
+	for (const line of lines) {
+		parseLineForEmbed(line, tabCache);
+		parseLineForHeadings(line, tabCache);
+		parseLineForLinks(line, tabCache);
+		parseLineForListItems(line, tabCache);
+		parseLineForSections(line, tabCache);
+		parseLineForTags(line, tabCache);
+	}
+
+	return tabCache;
+}
+
+function parseLineForEmbed(line: Line, tabCache: CachedMetadata) {
+	// TODO: parseLineForEmbed
+}
+
+function parseLineForHeadings(line: Line, tabCache: CachedMetadata) {
+	// TODO: parseLineForHeadings
+}
+
+function parseLineForLinks(line: Line, tabCache: CachedMetadata) {
+	const linkRegex = /(?<!!)\[\[(?<link>[^|\]]+)(\|(?<display>[^\]]+))?\]\]/g;
+	const matches: RegExpMatchArray[] = [...line.text.matchAll(linkRegex)];
+	if (matches.length > 0) {
+		tabCache.links = [];
+		matches.forEach(function (match: RegExpMatchArray) {
+			const col = match.index ? match.index : 0;
+			const start: Loc = {
+				col: col,
+				line: line.loc.line,
+				offset: line.loc.offset + col,
+			};
+			const linkCache: LinkCacheEx = {
+				intabs: true,
+				link: match.groups ? match.groups.link : match[1],
+				original: match[0],
+				position: {
+					end: {
+						col: start.col + match[0].length,
+						line: start.line,
+						offset: start.offset + match[0].length,
+					},
+					start: start,
+				},
+			};
+
+			if (match.groups && match.groups.display) {
+				linkCache.displayText = match.groups.display;
+			}
+
+			tabCache.links?.push(linkCache);
+		});
+	}
+}
+
+function parseLineForListItems(line: Line, tabCache: CachedMetadata) {
+	// TODO: parseLineForListItems
+}
+
+function parseLineForSections(line: Line, tabCache: CachedMetadata) {
+	// TODO: parseLineForSections
+}
+
+function parseLineForTags(line: Line, tabCache: CachedMetadata) {
+	// TODO: parseLineForTags
 }
