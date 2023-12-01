@@ -47,7 +47,7 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			intabs: true,
 		};
 
-		if (!pageCache.headings[0].intabs) {
+		if (!(pageCache.headings[0] as HeadingCacheEx).intabs) {
 			pageCache.headings.unshift(newHeading);
 		}
 	}
@@ -87,7 +87,7 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 			task: " ",
 			intabs: true,
 		};
-		if (!pageCache.listItems[0].intabs) {
+		if (!(pageCache.listItems[0] as ListItemCacheEx).intabs) {
 			pageCache.listItems.unshift(newTask2);
 			pageCache.listItems.unshift(newTask1);
 		}
@@ -121,5 +121,5 @@ function rebuildCache(pageCache: CachedMetadata | null, source: string) {
 		}
 	}
 
-	console.log(pageCache);
+	console.log("rebuildCache", pageCache);
 }

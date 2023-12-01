@@ -2,7 +2,6 @@ import { MarkdownPostProcessorContext, MarkdownRenderer } from "obsidian";
 import { Tabs } from "tabs";
 
 export function render(tabs: Tabs, source: string, container: HTMLElement, ctx: MarkdownPostProcessorContext): void {
-	console.log("render");
 	if (!tabs.hasTabs()) {
 		renderCodeBlock(container, source, "html");
 		return;
