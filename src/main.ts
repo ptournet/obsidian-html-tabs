@@ -1,8 +1,7 @@
 import { MarkdownPostProcessorContext, Plugin } from 'obsidian';
 // import { defaultSettings, HTMLTabsPluginSettings } from "./settings";
-import { Tabs } from './tabs';
 import { getTabExtSource, parseTabs } from './util/parsing';
-import { rebuildPageCache } from "./util/cache";
+import { updateCache } from "./util/cache";
 import { render } from 'ui/rendering';
 import Alpine from 'alpinejs';
  
@@ -112,7 +111,7 @@ export default class HTMLTabsPlugin extends Plugin {
 	public async renderTabs(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<void> {
 		const tabLines = getTabExtSource(el, ctx);
 		const tabs = parseTabs(tabLines);
-		rebuildPageCache(this.app, tabLines);
+		updateCache(this.app, tabLines);
 		render(tabs, source, el, ctx);
 	}
 

@@ -21,6 +21,7 @@ int main() {
 }
 ```
 ---tab Last tab
+This line has a simple link [[Test]], one [[Test|TestAlias]] an alternate text and a [[BrokenLink]]
 ![[Embedded note]]
 ~~~
 
@@ -34,3 +35,16 @@ int main() {
 
 ```tasks
 ```
+ 
+ [[3Test]] [[Test]]
+ 
+~~~tabs
+---tab New first *tab*
+Second tab example
+---tab # New second tab
+This tab has a JS code block:
+```js
+// Empty
+```
+~~~
+[[Sync changes.png]]
