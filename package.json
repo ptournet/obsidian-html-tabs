@@ -1,6 +1,6 @@
 {
   "name": "html-tabs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Create and render Tabs and tab panels in your notes.",
   "main": "main.js",
   "scripts": {
