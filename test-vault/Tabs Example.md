@@ -3,7 +3,7 @@
 ---tab First *tab*
 This is a *sample* **tab** with some markdown :
 ## Heading 2
-
+There is a #tag_in_tab and on with an emoticon #🚓
 - [ ] Task 1
 - [ ] Task 2
 ---tab # Second tab
@@ -36,7 +36,7 @@ This line has a simple link [[Test]], one [[Test|TestAlias]] an alternate text a
 ```tasks
 ```
  
- [[3Test]] [[Test]]
+ [[3Test]] [[Test]] #regular_tag #🚗
  
 ~~~tabs
 ---tab New first *tab*

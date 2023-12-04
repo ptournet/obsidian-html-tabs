@@ -1,7 +1,7 @@
 import { CachedMetadata, Loc, MarkdownPostProcessorContext } from "obsidian";
 import { Line, Lines } from "../lines";
 import { Tabs } from "../tabs";
-import { LinkCacheEx } from "./cache";
+import { LinkCacheEx, TagCacheEx } from "./cache";
 
 export function getTabExtSource(el: HTMLElement, ctx: MarkdownPostProcessorContext): Lines {
 	const sectionInfo = ctx.getSectionInfo(el);
@@ -140,5 +140,31 @@ function parseLineForSections(line: Line, tabCache: CachedMetadata) {
 }
 
 function parseLineForTags(line: Line, tabCache: CachedMetadata) {
-	// TODO: parseLineForTags
+	const tagRegex = /#(?![0-9]+$)[\w\-/\p{So}]+/gu;
+	const matches: RegExpMatchArray[] = [...line.text.matchAll(tagRegex)];
+	if (matches.length > 0) {
+		tabCache.tags = [];
+		matches.forEach(function (match: RegExpMatchArray) {
+			const col = match.index ? match.index : 0;
+			const start: Loc = {
+				col: col,
+				line: line.loc.line,
+				offset: line.loc.offset + col,
+			};
+			const tagCache: TagCacheEx = {
+				intabs: true,
+				tag: match[0],
+				position: {
+					end: {
+						col: start.col + match[0].length,
+						line: start.line,
+						offset: start.offset + match[0].length,
+					},
+					start: start,
+				},
+			};
+
+			tabCache.tags?.push(tagCache);
+		});
+	}
 }

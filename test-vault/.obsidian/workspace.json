@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Test.md",
+                "file": "Tabs Example.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#🚓  ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -85,9 +86,9 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Test.md",
-                "collapseAll": false,
-                "extraContext": false,
+                "file": "Tabs Example.md",
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Test.md",
+                "file": "Tabs Example.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Test.md"
+                "file": "Tabs Example.md"
               }
             }
           }
@@ -145,14 +146,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "988f8b326401dc86",
+  "active": "873ad12911f89593",
   "lastOpenFiles": [
-    "Tabs Example.md",
     "Test.md",
-    "Embedded note 2.md",
-    "Embedded note.md",
     "SubFolder/Test.md",
     "SubFolder",
+    "Tabs Example.md",
+    "Embedded note 2.md",
+    "Embedded note.md",
     "images/Sync changes.png",
     "images"
   ]

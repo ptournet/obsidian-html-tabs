@@ -1,5 +1,5 @@
 import { Lines } from "../lines";
-import { App, CachedMetadata, LinkCache, MetadataCache, TFile } from "obsidian";
+import { App, CachedMetadata, LinkCache, MetadataCache, TFile, TagCache } from "obsidian";
 import { parseLinesForCache } from "./parsing";
 
 // interface EmbedCacheEx extends EmbedCache {
@@ -22,9 +22,9 @@ export interface LinkCacheEx extends LinkCache {
 // 	intabs: boolean;
 // }
 
-// interface TagCacheEx extends TagCache {
-// 	intabs: boolean;
-// }
+export interface TagCacheEx extends TagCache {
+	intabs: boolean;
+}
 
 export function updateCache(app: App, tabLines: Lines) {
 	rebuildCurrentPageCache(app, tabLines);
@@ -36,6 +36,7 @@ function rebuildCurrentPageCache(app: App, tabLines: Lines) {
 	app.metadataCache.trigger("changed", current_file);
 	app.metadataCache.trigger("resolve", current_file);
 
+	console.log("rebuildCurrentPageCache", pageCache);
 	updateCacheLinks(app.metadataCache, pageCache, current_file);
 }
 
@@ -228,5 +229,18 @@ function rebuildSectionsCache(pageCache: CachedMetadata, tabCache: CachedMetadat
 }
 
 function rebuildTagsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
-	// TODO: rebuildTagsCache
+	if (!tabCache.tags) {
+		return;
+	}
+
+	if (!pageCache.tags) {
+		pageCache.tags = [];
+	}
+
+	const filteredTags = pageCache.tags.filter(tag => !(tag as TagCacheEx).intabs);
+	const newTags = filteredTags.concat(tabCache.tags as TagCacheEx[]).sort((a, b) => {
+		return a.position.start.offset - b.position.start.offset;
+	});
+
+	pageCache.tags = newTags;
 }
