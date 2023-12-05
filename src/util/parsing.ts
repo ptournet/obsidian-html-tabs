@@ -95,67 +95,71 @@ function parseLineForEmbed(line: Line, tabCache: CachedMetadata) {
 function parseLineForHeadings(line: Line, tabCache: CachedMetadata) {
 	const headingRegex = /^(#{1,6})\s+(.+)$/gm;
 	const matches: RegExpMatchArray[] = [...line.text.matchAll(headingRegex)];
-	if (matches.length > 0) {
-		tabCache.headings = [];
-		matches.forEach(function (match: RegExpMatchArray) {
-			const col = match.index ? match.index : 0;
-			const start: Loc = {
-				col: col,
-				line: line.loc.line,
-				offset: line.loc.offset + col,
-			};
-			const headingCache: HeadingCacheEx = {
-				intabs: true,
-				heading: match[0],
-				level: match[1].length,
-				position: {
-					end: {
-						col: start.col + match[0].length,
-						line: start.line,
-						offset: start.offset + match[0].length,
-					},
-					start: start,
-				},
-			};
-
-			tabCache.headings?.push(headingCache);
-		});
+	if (!matches.length) {
+		return;
 	}
+
+	tabCache.headings = [];
+	matches.forEach(function (match: RegExpMatchArray) {
+		const col = match.index ? match.index : 0;
+		const start: Loc = {
+			col: col,
+			line: line.loc.line,
+			offset: line.loc.offset + col,
+		};
+		const headingCache: HeadingCacheEx = {
+			intabs: true,
+			heading: match[0],
+			level: match[1].length,
+			position: {
+				end: {
+					col: start.col + match[0].length,
+					line: start.line,
+					offset: start.offset + match[0].length,
+				},
+				start: start,
+			},
+		};
+
+		tabCache.headings?.push(headingCache);
+	});
 }
 
 function parseLineForLinks(line: Line, tabCache: CachedMetadata) {
 	const linkRegex = /(?<!!)\[\[(?<link>[^|\]]+)(\|(?<display>[^\]]+))?\]\]/g;
 	const matches: RegExpMatchArray[] = [...line.text.matchAll(linkRegex)];
-	if (matches.length > 0) {
-		tabCache.links = [];
-		matches.forEach(function (match: RegExpMatchArray) {
-			const col = match.index ? match.index : 0;
-			const start: Loc = {
-				col: col,
-				line: line.loc.line,
-				offset: line.loc.offset + col,
-			};
-			const linkCache: LinkCacheEx = {
-				intabs: true,
-				link: match.groups ? match.groups.link : match[1],
-				original: match[0],
-				position: {
-					end: {
-						col: start.col + match[0].length,
-						line: start.line,
-						offset: start.offset + match[0].length,
-					},
-					start: start,
-				},
-			};
-
-			if (match.groups && match.groups.display) {
-				linkCache.displayText = match.groups.display;
-			}
-
-			tabCache.links?.push(linkCache);
-		});
+	if (!matches.length) {
+		return;
 	}
+
+	tabCache.links = [];
+	matches.forEach(function (match: RegExpMatchArray) {
+		const col = match.index ? match.index : 0;
+		const start: Loc = {
+			col: col,
+			line: line.loc.line,
+			offset: line.loc.offset + col,
+		};
+		const linkCache: LinkCacheEx = {
+			intabs: true,
+			link: match.groups ? match.groups.link : match[1],
+			original: match[0],
+			position: {
+				end: {
+					col: start.col + match[0].length,
+					line: start.line,
+					offset: start.offset + match[0].length,
+				},
+				start: start,
+			},
+		};
+
+		if (match.groups && match.groups.display) {
+			linkCache.displayText = match.groups.display;
+		}
+
+		tabCache.links?.push(linkCache);
+	});
 }
 
 function parseLineForListItems(line: Line, tabCache: CachedMetadata) {
@@ -169,29 +173,31 @@ function parseLineForSections(line: Line, tabCache: CachedMetadata) {
 function parseLineForTags(line: Line, tabCache: CachedMetadata) {
 	const tagRegex = /#(?![0-9]+$)[\w\-/\p{So}]+/gu;
 	const matches: RegExpMatchArray[] = [...line.text.matchAll(tagRegex)];
-	if (matches.length > 0) {
-		tabCache.tags = [];
-		matches.forEach(function (match: RegExpMatchArray) {
-			const col = match.index ? match.index : 0;
-			const start: Loc = {
-				col: col,
-				line: line.loc.line,
-				offset: line.loc.offset + col,
-			};
-			const tagCache: TagCacheEx = {
-				intabs: true,
-				tag: match[0],
-				position: {
-					end: {
-						col: start.col + match[0].length,
-						line: start.line,
-						offset: start.offset + match[0].length,
-					},
-					start: start,
-				},
-			};
-
-			tabCache.tags?.push(tagCache);
-		});
+	if (!matches.length) {
+		return;
 	}
+
+	tabCache.tags = [];
+	matches.forEach(function (match: RegExpMatchArray) {
+		const col = match.index ? match.index : 0;
+		const start: Loc = {
+			col: col,
+			line: line.loc.line,
+			offset: line.loc.offset + col,
+		};
+		const tagCache: TagCacheEx = {
+			intabs: true,
+			tag: match[0],
+			position: {
+				end: {
+					col: start.col + match[0].length,
+					line: start.line,
+					offset: start.offset + match[0].length,
+				},
+				start: start,
+			},
+		};
+
+		tabCache.tags?.push(tagCache);
+	});
 }
