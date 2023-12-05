@@ -106,13 +106,13 @@ As of now, there is no interaction between Obsidian and the content of the tabs.
 - [x] Markdown rendering of label
 - [ ] Updating Obsidian cache
   - [x] for Links (in order to have backlinks working)
-  - [ ] for Headings (in order to have the note Outline working)
+  - [x] for Tags
+  - [x] for Headings (in order to have the note Outline working)
   - [ ] for Lists (in order to have Tasks woring)
-  - [ ] for Tags
   - [ ] for Embeds
   - [ ] for Sections
 - [ ] Create first Settings
-- [ ] Integrate labels in note outline
+- [ ] Integrate labels in note outline ?
 - [ ] Ability to open note on a specific label/tab
 - [ ] Improve standard editing experience (place cursor in the right place in the right tab)
 - [ ] Improve embedded editing experience (if tab content is in another note, allow editing that note instead)

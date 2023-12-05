@@ -1,14 +1,14 @@
 import { Lines } from "../lines";
-import { App, CachedMetadata, LinkCache, MetadataCache, TFile, TagCache } from "obsidian";
+import { App, CachedMetadata, HeadingCache, LinkCache, MetadataCache, TFile, TagCache } from "obsidian";
 import { parseLinesForCache } from "./parsing";
 
 // interface EmbedCacheEx extends EmbedCache {
 // 	intabs: boolean;
 // }
 
-// interface HeadingCacheEx extends HeadingCache {
-// 	intabs: boolean;
-// }
+export interface HeadingCacheEx extends HeadingCache {
+	intabs: boolean;
+}
 
 export interface LinkCacheEx extends LinkCache {
 	intabs: boolean;
@@ -110,30 +110,20 @@ function rebuildEmbedsCache(pageCache: CachedMetadata, tabCache: CachedMetadata)
 }
 
 function rebuildHeadingsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
-	// TODO: rebuildHeadingsCache
-	// if (pageCache.headings) {
-	// 	const newHeading: HeadingCacheEx = {
-	// 		heading: "Heading 2",
-	// 		level: 2,
-	// 		position: {
-	// 			end: {
-	// 				line: 4,
-	// 				col: 12,
-	// 				offset: 88,
-	// 			},
-	// 			start: {
-	// 				line: 4,
-	// 				col: 0,
-	// 				offset: 76,
-	// 			},
-	// 		},
-	// 		intabs: true,
-	// 	};
+	if (!tabCache.headings) {
+		return;
+	}
 
-	// 	if (!(pageCache.headings[0] as HeadingCacheEx).intabs) {
-	// 		pageCache.headings.unshift(newHeading);
-	// 	}
-	// }
+	if (!pageCache.headings) {
+		pageCache.headings = [];
+	}
+
+	const filteredHeadings = pageCache.headings.filter(link => !(link as HeadingCacheEx).intabs);
+	const newHeadings = filteredHeadings.concat(tabCache.headings as HeadingCacheEx[]).sort((a, b) => {
+		return a.position.start.offset - b.position.start.offset;
+	});
+
+	pageCache.headings = newHeadings;
 }
 
 function rebuildLinksCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {

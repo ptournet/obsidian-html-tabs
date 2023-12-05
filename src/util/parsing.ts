@@ -1,7 +1,7 @@
 import { CachedMetadata, Loc, MarkdownPostProcessorContext } from "obsidian";
+import { HeadingCacheEx, LinkCacheEx, TagCacheEx } from "./cache";
 import { Line, Lines } from "../lines";
 import { Tabs } from "../tabs";
-import { LinkCacheEx, TagCacheEx } from "./cache";
 
 export function getTabExtSource(el: HTMLElement, ctx: MarkdownPostProcessorContext): Lines {
 	const sectionInfo = ctx.getSectionInfo(el);
@@ -93,7 +93,34 @@ function parseLineForEmbed(line: Line, tabCache: CachedMetadata) {
 }
 
 function parseLineForHeadings(line: Line, tabCache: CachedMetadata) {
-	// TODO: parseLineForHeadings
+	const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+	const matches: RegExpMatchArray[] = [...line.text.matchAll(headingRegex)];
+	if (matches.length > 0) {
+		tabCache.headings = [];
+		matches.forEach(function (match: RegExpMatchArray) {
+			const col = match.index ? match.index : 0;
+			const start: Loc = {
+				col: col,
+				line: line.loc.line,
+				offset: line.loc.offset + col,
+			};
+			const headingCache: HeadingCacheEx = {
+				intabs: true,
+				heading: match[0],
+				level: match[1].length,
+				position: {
+					end: {
+						col: start.col + match[0].length,
+						line: start.line,
+						offset: start.offset + match[0].length,
+					},
+					start: start,
+				},
+			};
+
+			tabCache.headings?.push(headingCache);
+		});
+	}
 }
 
 function parseLineForLinks(line: Line, tabCache: CachedMetadata) {
