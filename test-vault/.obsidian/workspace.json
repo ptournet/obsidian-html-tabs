@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "264b963683564183",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tabs Example.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -65,8 +78,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -146,12 +158,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "873ad12911f89593",
+  "active": "264b963683564183",
   "lastOpenFiles": [
+    "Tasks.md",
+    "Tabs Example.md",
     "Test.md",
     "SubFolder/Test.md",
     "SubFolder",
-    "Tabs Example.md",
     "Embedded note 2.md",
     "Embedded note.md",
     "images/Sync changes.png",

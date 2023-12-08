@@ -28,7 +28,9 @@ This line has a simple link [[Test]], one [[Test|TestAlias]] an alternate text a
 ---
 # 1-H1
 - [ ] First task
-- [ ] Second task
+ - [ ] Second task
+   - [ ] Third task
+   - [ ] Fourth task
 ## 1.1-H2
 ## 1.2-H2
 # 2-H1

@@ -1,7 +1,16 @@
 import { CachedMetadata, Loc, MarkdownPostProcessorContext } from "obsidian";
-import { HeadingCacheEx, LinkCacheEx, TagCacheEx } from "./cache";
+import { HeadingCacheEx, LinkCacheEx, ListItemCacheEx, TagCacheEx } from "./cache";
 import { Line, Lines } from "../lines";
 import { Tabs } from "../tabs";
+
+class TaskItem {
+	level: number;
+	line: number;
+	parent: TaskItem;
+	children: TaskItem[];
+}
+
+let taskItemList: TaskItem[] = [];
 
 export function getTabExtSource(el: HTMLElement, ctx: MarkdownPostProcessorContext): Lines {
 	const sectionInfo = ctx.getSectionInfo(el);
@@ -100,29 +109,28 @@ function parseLineForHeadings(line: Line, tabCache: CachedMetadata) {
 	}
 
 	tabCache.headings = [];
-	matches.forEach(function (match: RegExpMatchArray) {
-		const col = match.index ? match.index : 0;
-		const start: Loc = {
-			col: col,
-			line: line.loc.line,
-			offset: line.loc.offset + col,
-		};
-		const headingCache: HeadingCacheEx = {
-			intabs: true,
-			heading: match[0],
-			level: match[1].length,
-			position: {
-				end: {
-					col: start.col + match[0].length,
-					line: start.line,
-					offset: start.offset + match[0].length,
-				},
-				start: start,
+	const match = matches[0];
+	const col = match.index ? match.index : 0;
+	const start: Loc = {
+		col: col,
+		line: line.loc.line,
+		offset: line.loc.offset + col,
+	};
+	const headingCache: HeadingCacheEx = {
+		intabs: true,
+		heading: match[0],
+		level: match[1].length,
+		position: {
+			end: {
+				col: start.col + match[0].length,
+				line: start.line,
+				offset: start.offset + match[0].length,
 			},
-		};
+			start: start,
+		},
+	};
 
-		tabCache.headings?.push(headingCache);
-	});
+	tabCache.headings?.push(headingCache);
 }
 
 function parseLineForLinks(line: Line, tabCache: CachedMetadata) {
@@ -163,7 +171,40 @@ function parseLineForLinks(line: Line, tabCache: CachedMetadata) {
 }
 
 function parseLineForListItems(line: Line, tabCache: CachedMetadata) {
-	// TODO: parseLineForListItems
+	const taskItemRegex = /^(\t*)[-+*][ \t]*\[(.)\][ \t]*(.*)/g;
+	const matches: RegExpMatchArray[] = [...line.text.matchAll(taskItemRegex)];
+	if (!matches.length) {
+		taskItemList = [];
+		return;
+	}
+
+	tabCache.listItems = [];
+	const match = matches[0];
+	const indent = match[1].length;
+	const col = match.index ? match.index + indent : 0;
+	const realLength = match[0].length - indent;
+	const start: Loc = {
+		col: col,
+		line: line.loc.line,
+		offset: line.loc.offset + col,
+	};
+	// TODO: parseLineForListItems - Compute parent
+	const parentNum = 0;
+	const listItemCache: ListItemCacheEx = {
+		intabs: true,
+		parent: parentNum,
+		task: match[2],
+		position: {
+			end: {
+				col: start.col + realLength,
+				line: start.line,
+				offset: start.offset + realLength,
+			},
+			start: start,
+		},
+	};
+
+	tabCache.listItems?.push(listItemCache);
 }
 
 function parseLineForSections(line: Line, tabCache: CachedMetadata) {

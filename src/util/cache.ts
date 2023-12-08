@@ -1,5 +1,5 @@
 import { Lines } from "../lines";
-import { App, CachedMetadata, HeadingCache, LinkCache, MetadataCache, TFile, TagCache } from "obsidian";
+import { App, CachedMetadata, HeadingCache, LinkCache, ListItemCache, MetadataCache, TFile, TagCache } from "obsidian";
 import { parseLinesForCache } from "./parsing";
 
 // interface EmbedCacheEx extends EmbedCache {
@@ -14,9 +14,9 @@ export interface LinkCacheEx extends LinkCache {
 	intabs: boolean;
 }
 
-// interface ListItemCacheEx extends ListItemCache {
-// 	intabs: boolean;
-// }
+export interface ListItemCacheEx extends ListItemCache {
+	intabs: boolean;
+}
 
 // interface SectionCacheEx extends SectionCache {
 // 	intabs: boolean;
@@ -32,12 +32,12 @@ export function updateCache(app: App, tabLines: Lines) {
 function rebuildCurrentPageCache(app: App, tabLines: Lines) {
 	const current_file = app.workspace.getActiveFile();
 	const pageCache = getPageCache(current_file);
+
 	rebuildPageCache(pageCache, tabLines);
+	updateCacheLinks(app.metadataCache, pageCache, current_file);
+	
 	app.metadataCache.trigger("changed", current_file);
 	app.metadataCache.trigger("resolve", current_file);
-
-	console.log("rebuildCurrentPageCache", pageCache);
-	updateCacheLinks(app.metadataCache, pageCache, current_file);
 }
 
 function updateCacheLinks(metadataCache: MetadataCache, pageCache: CachedMetadata | null, current_file: TFile | null) {
@@ -144,6 +144,8 @@ function rebuildLinksCache(pageCache: CachedMetadata, tabCache: CachedMetadata) 
 }
 
 function rebuildListItemsCache(pageCache: CachedMetadata, tabCache: CachedMetadata) {
+	console.log("rebuildListItemsCache", pageCache.listItems);
+	
 	// TODO: rebuildListItemsCache
 	// if (pageCache.listItems) {
 	// 	const newTask1: ListItemCacheEx = {
